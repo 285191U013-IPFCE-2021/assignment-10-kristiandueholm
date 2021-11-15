@@ -11,23 +11,34 @@ extern "C"
 
 TEST_CASE("linked_list")
 {
-    	//exercise 2
-    	int sum;
-      node *ns = NULL;
-    	ns = make_node (1,
-			make_node (2,
-				   make_node (3,
-					      make_node (4,
-							  make_node (5,
-								    &SENTINEL_node)))));
+  int sum;
+  node *ns = NULL;
+  ns = make_node (1,
+  make_node (2,
+        make_node (3,
+            make_node (4,
+            make_node (5,
+                NULL)))));
+
+  print_list(ns);
+      
+  //exercise 2
+  int sum;
+  node *ns = NULL;
+  ns = make_node (1,
+  make_node (2,
+        make_node (3,
+            make_node (4,
+            make_node (5,
+                NULL)))));
 
 	sum = sum_squares (ns);	/* sum should equal 55 */
-  	REQUIRE(sum==55);
-  	free_list(ns);
+  REQUIRE(sum==55);
+  free_list(ns);
 	sum=sum_squares(ns);
 	REQUIRE(sum==0);
 
-	ns = make_node (1,&SENTINEL_node);
+	ns = make_node (1,NULL);
 	sum=sum_squares(ns);
 	REQUIRE(sum==1);
 	

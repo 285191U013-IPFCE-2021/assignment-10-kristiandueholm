@@ -36,21 +36,44 @@ void free_list (node * p)
 /* print list to console */
 void print_list (node * p)
 {
-    // Add your code for exercise 1
-    // There is NO testcode for this
+    printf("%d", p->value);
+
+    if (p->next != NULL)
+    {
+      print_list(p->next);
+    }
+    return;
 }
 
 int sum_squares (node * p)
 {
-    // Add your code for excercise 2
-    // You can find the tests in tests.cpp
-    return -1;
+  int sum = p->value * p->value;
+
+  if (p->next != NULL)
+  {
+    sum += sum_squares(p->next);
+  }
+
+  return sum;
 }
 
 node *map (node * p, int (*f) (int))
 {
-    // Add your code for excercise 3
-    return NULL;
+  node *q = malloc(sizeof(node));
+
+  q->value = f(p->value);
+  
+  if (p->value != NULL)
+  {
+    q->next = map(p->next, f);
+  }
+
+  else
+  {
+    q->next = NULL;
+  }
+  
+  return q;
 }
 
 
