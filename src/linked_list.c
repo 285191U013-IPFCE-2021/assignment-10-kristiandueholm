@@ -1,4 +1,4 @@
-#include "linked_list.h"
+#include "..\include\linked_list.h"
 /*
  * Linked list
  */
@@ -13,8 +13,8 @@ node *make_node (int v, node * q)
   node *p = malloc (sizeof (node));
   p->value = v;
 
-  if (q == &SENTINEL_node)
-    p->next = &SENTINEL_node;
+  if (q == NULL)
+    p->next = NULL;
   else
     p->next = q;
   return p;
@@ -24,7 +24,7 @@ node *make_node (int v, node * q)
 void free_list (node * p)
 {
   node *q = p;
-  while (q != &SENTINEL_node)
+  while (q != NULL)
     {
       node *t = q->next;
       free (q);
@@ -63,7 +63,7 @@ node *map (node * p, int (*f) (int))
 
   q->value = f(p->value);
   
-  if (p->value != NULL)
+  if (p->next != NULL)
   {
     q->next = map(p->next, f);
   }

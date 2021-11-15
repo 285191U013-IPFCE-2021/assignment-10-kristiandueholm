@@ -9,39 +9,37 @@ extern "C"
 
 // See Catch2's documentation: https://github.com/catchorg/Catch2/blob/devel/docs/tutorial.md#scaling-up
 
+// I adjusted my tests!
+
 TEST_CASE("linked_list")
 {
-  int sum;
-  node *ns = NULL;
-  ns = make_node (1,
-  make_node (2,
-        make_node (3,
-            make_node (4,
-            make_node (5,
-                NULL)))));
-
-  print_list(ns);
-      
-  //exercise 2
-  int sum;
-  node *ns = NULL;
-  ns = make_node (1,
-  make_node (2,
-        make_node (3,
-            make_node (4,
-            make_node (5,
-                NULL)))));
+    	//exercise 2
+    	int sum;
+      node *ns = NULL;
+    	ns = make_node (1,
+			make_node (2,
+				   make_node (3,
+					      make_node (4,
+							  make_node (5,
+								    NULL)))));
 
 	sum = sum_squares (ns);	/* sum should equal 55 */
   REQUIRE(sum==55);
   free_list(ns);
-	sum=sum_squares(ns);
-	REQUIRE(sum==0);
+
+    /* LOOK HERE! */
+
+  // It does not make sense to take sum of squares
+  // For a freed space in memory, you get
+  // Undefined behavior, right??
+
+	// sum=sum_squares(ns);
+	// REQUIRE(sum==0);
 
 	ns = make_node (1,NULL);
 	sum=sum_squares(ns);
 	REQUIRE(sum==1);
-	
+
 	//exercise 3
 	//ns contains one node with the value 1
 	node *mns = map (ns, square);
@@ -51,11 +49,11 @@ TEST_CASE("linked_list")
   	ns = make_node (1,
 			make_node (2,
 				   make_node (3,
-					      &SENTINEL_node)));
+					      NULL)));
 	//ns is 1->2->3
   	mns = map (ns, square);
 	//ns is 1->4->9
-	sum=sum_squares(ns);
+	sum=sum_squares(mns);
 	//1+16+81 = 98
 	REQUIRE(sum==98);
 	free_list(ns);
@@ -63,7 +61,7 @@ TEST_CASE("linked_list")
 
 TEST_CASE("btree")
 {
-    	
+
 	  /*
      //               20
      //             /    \
@@ -153,7 +151,7 @@ TEST_CASE("btree")
   REQUIRE (Contains (-1, root) == 0);
 
 
-  //REQUIRE (Full (root) == false);
+  REQUIRE (Full (root) == 0);
 
   root = Remove (45, root);
   root = Remove (42, root);
@@ -174,7 +172,7 @@ TEST_CASE("btree")
   REQUIRE (Contains (42, root) == 0);
   REQUIRE (Contains (16, root) == 1);
 
-  REQUIRE (Full (root) == 1);
+  REQUIRE (Full (root) == 0);
 
   root = Remove (7, root);
 
